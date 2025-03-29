@@ -1,2 +1,2 @@
-1 add a docker compose
-2 check for types and fix issues
+A simple payment app built on a monorepo architecture using Next.js and Express, featuring a dummy bank server and onramp support.
+
