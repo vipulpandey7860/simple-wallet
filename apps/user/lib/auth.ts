@@ -3,7 +3,6 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 import { NextAuthOptions, DefaultSession } from "next-auth";
 
-
 // Define the user type that NextAuth expects
 type AuthUser = {
   id: string;
@@ -71,6 +70,16 @@ export const authOptions: NextAuthOptions = {
               name: credentials.email.split("@")[0], // Optional: Set default name
             },
           });
+
+          if (user) {
+            await prisma.balance.create({
+              data: {
+                userId: user.id,
+                amount: 0,
+                locked: 0,
+              },
+            });
+          }
 
           return {
             id: user.id.toString(),
